@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "msm-platform": "apps/msm-platform",
+    "msm-platform-e2e": "apps/msm-platform-e2e"
+  }
+}

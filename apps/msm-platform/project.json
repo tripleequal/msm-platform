@@ -1,0 +1,72 @@
+{
+  "root": "apps/msm-platform",
+  "sourceRoot": "apps/msm-platform/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/msm-platform",
+        "index": "apps/msm-platform/src/index.html",
+        "baseHref": "/",
+        "main": "apps/msm-platform/src/main.tsx",
+        "polyfills": "apps/msm-platform/src/polyfills.ts",
+        "tsConfig": "apps/msm-platform/tsconfig.app.json",
+        "assets": [
+          "apps/msm-platform/src/favicon.ico",
+          "apps/msm-platform/src/assets"
+        ],
+        "styles": ["apps/msm-platform/src/styles.scss"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/msm-platform/src/environments/environment.ts",
+              "with": "apps/msm-platform/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "msm-platform:build",
+        "hmr": true
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "msm-platform:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/msm-platform/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/msm-platform"],
+      "options": {
+        "jestConfig": "apps/msm-platform/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
