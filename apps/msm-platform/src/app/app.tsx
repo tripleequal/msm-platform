@@ -1,7 +1,7 @@
-import styles from './app.module.scss';
+import styles from './app.module.scss'
 
-import { ReactComponent as Logo } from './logo.svg';
-import star from './star.svg';
+import { ReactComponent as Logo } from './logo.svg'
+import star from './star.svg'
 
 export function App() {
   return (
@@ -95,7 +95,7 @@ nx affected:e2e
         </details>
       </main>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
