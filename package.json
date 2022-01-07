@@ -10,6 +10,7 @@
   "private": true,
   "dependencies": {
     "core-js": "^3.6.5",
+    "nx": "^13.2.3",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "regenerator-runtime": "0.13.7",
