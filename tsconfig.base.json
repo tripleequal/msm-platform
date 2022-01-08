@@ -14,7 +14,13 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@msm/admin": ["libs/admin/src/index.ts"],
+      "@msm/core": ["libs/core/src/index.ts"],
+      "@msm/students": ["libs/students/src/index.ts"],
+      "@msm/teachers": ["libs/teachers/src/index.ts"],
+      "@msm/ui": ["libs/ui/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

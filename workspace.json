@@ -1,7 +1,12 @@
 {
   "version": 2,
   "projects": {
+    "admin": "libs/admin",
+    "core": "libs/core",
     "msm-platform": "apps/msm-platform",
-    "msm-platform-e2e": "apps/msm-platform-e2e"
+    "msm-platform-e2e": "apps/msm-platform-e2e",
+    "students": "libs/students",
+    "teachers": "libs/teachers",
+    "ui": "libs/ui"
   }
 }
