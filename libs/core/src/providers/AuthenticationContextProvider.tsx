@@ -1,4 +1,5 @@
-import { createContext, HTMLAttributes, useContext } from 'react'
+import { createContext, HTMLAttributes, useContext, useState } from 'react'
+import { noop } from '../utils'
 
 interface IUser {
   firstName: string
@@ -13,20 +14,25 @@ interface IAuthData {
 
 interface IAuthContext extends IAuthData {
   tokenCheck: () => boolean
+  onLogin: (authData: IAuthData) => void
 }
 
 const initialValues: IAuthContext = {
   user: null,
   tokenCheck: () => false,
+  onLogin: noop,
 }
 
 const AuthenticationContext = createContext<IAuthContext>(initialValues)
+const AUTH_KEY = '__msm_auth__'
 
 export function AuthenticationContextProvider(
   props: HTMLAttributes<HTMLDivElement>
 ) {
+  const [user, setUser] = useState<IUser | null | undefined>(null)
+
   const tokenCheck = () => {
-    const authData = localStorage.getItem('__msm_auth__')
+    const authData = localStorage.getItem(AUTH_KEY)
     if (authData) {
       const parsed = JSON.parse(authData)
       return !!parsed.token
@@ -35,7 +41,12 @@ export function AuthenticationContextProvider(
     }
   }
 
-  const values: IAuthContext = { ...initialValues, tokenCheck }
+  const onLogin = (authData: IAuthData) => {
+    localStorage.setItem(AUTH_KEY, JSON.stringify({ token: authData.token }))
+    setUser(authData.user)
+  }
+
+  const values: IAuthContext = { ...initialValues, tokenCheck, onLogin, user }
 
   return (
     <AuthenticationContext.Provider

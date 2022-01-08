@@ -1,16 +1,14 @@
-import { useAuthenticationContext } from '@msm/core'
-import { Students } from '@msm/students'
-import { Redirect, useLocation } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
+import Login from '../components/Login/Login'
+import ModuleLoader from '../components/ModuleLoader/ModuleLoader'
 
 export function App() {
-  const { tokenCheck } = useAuthenticationContext()
-  const location = useLocation()
-
-  if (tokenCheck()) {
-    return <Students />
-  }
-
-  return <Redirect to={{ pathname: '/login', state: { from: location } }} />
+  return (
+    <Switch>
+      <Route exact path="/login" component={Login} />
+      <Route path="/" component={ModuleLoader} />
+    </Switch>
+  )
 }
 
 export default App
