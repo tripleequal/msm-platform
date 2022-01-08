@@ -1,3 +1,4 @@
+import { useAuthenticationContext } from '@msm/core'
 import { Route, Link } from 'react-router-dom'
 
 import styled from 'styled-components'
@@ -10,6 +11,7 @@ const StyledStudents = styled.div`
 `
 
 export function Students(props: StudentsProps) {
+  const { user } = useAuthenticationContext()
   return (
     <StyledStudents>
       <h1>Welcome to Students!</h1>
