@@ -8,7 +8,7 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/msm-platform",
+        "outputPath": "apps/msm-platform/dist/apps/msm-platform",
         "index": "apps/msm-platform/src/index.html",
         "baseHref": "/",
         "main": "apps/msm-platform/src/main.tsx",

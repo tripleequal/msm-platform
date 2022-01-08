@@ -1,0 +1,14 @@
+version: 1
+applications:
+  - appRoot: apps/msm-platform
+    frontend:
+      phases:
+        build:
+          commands: 'npm run msm-platform:build:production'
+      artifacts:
+        baseDirectory: dist/apps/msm-platform
+        files:
+          - '**/*'
+      cache:
+        paths: []
+
