@@ -1,7 +1,8 @@
 import { useAuthenticationContext } from '@msm/core'
-import { Route, Link } from 'react-router-dom'
+import { Route, Link, Redirect, Switch, NavLink } from 'react-router-dom'
 
 import styled from 'styled-components'
+import Portfolio from './Portfolio/Portfolio'
 
 /* eslint-disable-next-line */
 export interface StudentsProps {}
@@ -18,15 +19,22 @@ export function Students(props: StudentsProps) {
 
       <ul>
         <li>
-          <Link to="/">students root</Link>
+          <StyledNavLink foo to="/portfolio" isActive={(match) => !!match}>
+            Portfolio
+          </StyledNavLink>
         </li>
       </ul>
-      <Route
-        path="/"
-        render={() => <div>This is the students root route.</div>}
-      />
+
+      <Switch>
+        <Redirect path="/" exact to="/portfolio" />
+        <Route path="/portfolio" component={Portfolio} />
+      </Switch>
     </StyledStudents>
   )
 }
+
+const StyledNavLink = styled(NavLink)<{ foo: boolean }>`
+  ${({ foo }) => (foo ? '' : '')}
+`
 
 export default Students
