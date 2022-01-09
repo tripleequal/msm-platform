@@ -20,7 +20,8 @@
       "@msm/core/utils": ["libs/core/src/utils/index.ts"],
       "@msm/students": ["libs/students/src/index.ts"],
       "@msm/teachers": ["libs/teachers/src/index.ts"],
-      "@msm/ui": ["libs/ui/src/index.ts"]
+      "@msm/ui": ["libs/ui/src/index.ts"],
+      "@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"]
     }
   },
   "exclude": ["node_modules", "tmp"]

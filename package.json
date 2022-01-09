@@ -9,6 +9,10 @@
   },
   "private": true,
   "dependencies": {
+    "@mui/icons-material": "^5.2.5",
+    "@mui/material": "^5.2.7",
+    "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest",
+    "@mui/styled-engine-sc": "^5.1.0",
     "core-js": "^3.6.5",
     "nx": "^13.2.3",
     "react": "17.0.2",
@@ -66,5 +70,8 @@
     "ts-jest": "27.0.5",
     "typescript": "~4.4.3",
     "url-loader": "^3.0.0"
+  },
+  "resolutions": {
+    "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest"
   }
 }
