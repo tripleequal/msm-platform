@@ -1,6 +1,6 @@
 {
-  "root": "apps/msm-platform",
-  "sourceRoot": "apps/msm-platform/src",
+  "root": "apps/msm-api",
+  "sourceRoot": "apps/msm-api/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -8,17 +8,14 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist",
-        "index": "apps/msm-platform/src/index.html",
+        "outputPath": "dist/apps/msm-api",
+        "index": "apps/msm-api/src/index.html",
         "baseHref": "/",
-        "main": "apps/msm-platform/src/main.tsx",
-        "polyfills": "apps/msm-platform/src/polyfills.ts",
-        "tsConfig": "apps/msm-platform/tsconfig.app.json",
-        "assets": [
-          "apps/msm-platform/src/favicon.ico",
-          "apps/msm-platform/src/assets"
-        ],
-        "styles": ["apps/msm-platform/src/styles.scss"],
+        "main": "apps/msm-api/src/main.tsx",
+        "polyfills": "apps/msm-api/src/polyfills.ts",
+        "tsConfig": "apps/msm-api/tsconfig.app.json",
+        "assets": ["apps/msm-api/src/favicon.ico", "apps/msm-api/src/assets"],
+        "styles": [],
         "scripts": [],
         "webpackConfig": "@nrwl/react/plugins/webpack"
       },
@@ -26,8 +23,8 @@
         "production": {
           "fileReplacements": [
             {
-              "replace": "apps/msm-platform/src/environments/environment.ts",
-              "with": "apps/msm-platform/src/environments/environment.prod.ts"
+              "replace": "apps/msm-api/src/environments/environment.ts",
+              "with": "apps/msm-api/src/environments/environment.prod.ts"
             }
           ],
           "optimization": true,
@@ -42,12 +39,12 @@
     "serve": {
       "executor": "@nrwl/web:dev-server",
       "options": {
-        "buildTarget": "msm-platform:build",
+        "buildTarget": "msm-api:build",
         "hmr": true
       },
       "configurations": {
         "production": {
-          "buildTarget": "msm-platform:build:production",
+          "buildTarget": "msm-api:build:production",
           "hmr": false
         }
       }
@@ -56,14 +53,14 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/msm-platform/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["apps/msm-api/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/msm-platform"],
+      "outputs": ["coverage/apps/msm-api"],
       "options": {
-        "jestConfig": "apps/msm-platform/jest.config.js",
+        "jestConfig": "apps/msm-api/jest.config.js",
         "passWithNoTests": true
       }
     }

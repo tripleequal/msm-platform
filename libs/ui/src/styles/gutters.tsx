@@ -1,18 +1,19 @@
-import styled, { css } from 'styled-components'
+import { css } from 'styled-components'
 
-const BASE_GUTTER = 8
-const MULTIPLIERS = [0, 1, 2, 3, 4].map((n) => n * BASE_GUTTER)
+const BASE_GUTTER = 4
+const MULTIPLIERS = [0, 1, 2, 3, 4, 5, 6, 7, 8].map((n) => n * BASE_GUTTER)
 
 function generateGutterCSSVars() {
-  return `
-    :root {
-        ${() => {
-          return MULTIPLIERS.map((size, i) => `--gutter-${i}: ${size}px;`).join(
-            '\n'
-          )
-        }}
-      }      
-    `
+  return MULTIPLIERS.map((size, i) => `--gutter-${i}: ${size}px;`).join('\n')
+  // return `
+  //   :root {
+  //       ${() => {
+  //         return MULTIPLIERS.map((size, i) => `--gutter-${i}: ${size}px;`).join(
+  //           '\n'
+  //         )
+  //       }}
+  //     }
+  //   `
 }
 
 function generateGutterClass(prefix: string, rules: string[]) {
@@ -36,7 +37,9 @@ function generateGutterClass(prefix: string, rules: string[]) {
 }
 
 export default css`
-  ${generateGutterCSSVars()}
+  :root {
+    ${generateGutterCSSVars()}
+  }
   ${generateGutterClass('pt', ['padding-top'])}
   ${generateGutterClass('pr', ['padding-right'])}
   ${generateGutterClass('pb', ['padding-bottom'])}

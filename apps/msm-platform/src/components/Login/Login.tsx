@@ -1,4 +1,5 @@
 import { useAuthenticationContext } from '@msm/core'
+import { Branding } from '@msm/ui'
 import {
   Avatar,
   Box,
@@ -8,16 +9,19 @@ import {
   FormControlLabel,
   Grid,
   Link,
+  Stack,
   TextField,
   Typography,
-  TypographyProps,
+  TypographyProps
 } from '@mui/material'
 import { HTMLAttributes, useCallback, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import styled from 'styled-components'
+import { border } from '@mui/system'
 
 export default function Login() {
+  const isDemo = false
   const [loginLoading, setLoginLoading] = useState(false)
   const [loginError, setLoginError] = useState('')
   const [username, setUserName] = useState('')
@@ -49,92 +53,133 @@ export default function Login() {
     [username, password, location, login]
   )
 
+  const brandingTemplate = () => {
+    return isDemo ? (
+      <DemoPanel />
+    ) : (
+      <h2 className="branding-header pt-6">
+        <Branding />
+      </h2>
+    )
+  }
+
   return (
-    <Container component="main" maxWidth="xs">
-      <Box
-        sx={{
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Login"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            value={username}
-            onChange={(e) => setUserName(e.target.value)}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+    <Stack
+      className="full-height"
+      justifyContent="center"
+      alignItems="stretch"
+      spacing={0}
+    >
+      <LoginGrid direction="row" justifyContent="center" alignItems="stretch">
+        <Grid
+          className="login-wrap"
+          display="flex"
+          direction="row"
+          justifyContent="center"
+        >
+          <Grid
+            className="login-box"
+            display="flex"
+            direction="row"
+            alignItems="stretch"
           >
-            Sign In
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
+            <Grid
+              className="box-left"
+              display="flex"
+              direction="column"
+              alignItems="center"
+            >
+              {brandingTemplate()}
             </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
+            <Grid
+              className="box-right"
+              display="flex"
+              direction="column"
+              alignItems="center"
+            >
+              <Grid component="form" onSubmit={handleSubmit} noValidate>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="username"
+                  label="Username"
+                  name="username"
+                  autoComplete="username"
+                  autoFocus
+                  value={username}
+                  onChange={(e) => setUserName(e.target.value)}
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Sign In
+                </Button>
+              </Grid>
             </Grid>
           </Grid>
-        </Box>
-      </Box>
-      <Copyright sx={{ mt: 8, mb: 4 }} />
-    </Container>
+        </Grid>
+      </LoginGrid>
+    </Stack>
   )
 }
 
-function Copyright(props: TypographyProps) {
+const LoginGrid = styled(Grid)`
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+  height: 243px;
+
+  .login-wrap {
+    width: 100%;
+    border-top: 4px solid #a70d00;
+    border-bottom: 4px solid #a70d00;
+    height: 239px;
+    text-align: center;
+
+    .login-box {
+      width: 700px;
+
+      .branding-header {
+        margin: 0;
+        font-size: 2.8rem;
+        font-weight: 300;
+      }
+    }
+  }
+`
+
+function DemoPanel() {
   return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
+    <div id="demo-panel" className="demo-panel">
+      <h1 className="demo-header">Curriculum Overview</h1>
+      <img
+        src="https://demo.midschoolmath.com/assets/demo-image-2116454ff1cdb9c4f81fd2a834e66a59.png"
+        width="350"
+        alt=""
+      />
+      <Button
+        href="https://msmapp.s3.amazonaws.com/assets/documents/MidSchoolMath-Catalog-Spring-2021.pdf"
+        target="_blank"
+        className="button red_button"
+        rel="noreferrer"
+      >
+        Download
+      </Button>
+    </div>
   )
 }

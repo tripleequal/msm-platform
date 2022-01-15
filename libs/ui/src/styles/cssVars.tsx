@@ -1,9 +1,7 @@
-import styled, { css } from 'styled-components'
-
-const BASE_GUTTER = 8
+import { css } from 'styled-components'
 
 export default css`
   :root {
-    --color: green;
+    --branding-emphasis: #a70d00;
   }
 `
