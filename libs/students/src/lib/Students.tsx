@@ -1,5 +1,7 @@
 import { useAuthenticationContext } from '@msm/core'
-import { Route, Link, Redirect, Switch, NavLink } from 'react-router-dom'
+import { defaultTheme } from '@msm/ui'
+import { ThemeProvider } from '@mui/system'
+import { Route, Navigate, Routes, NavLink } from 'react-router-dom'
 
 import styled from 'styled-components'
 import Portfolio from './Portfolio/Portfolio'
@@ -9,10 +11,10 @@ export interface StudentsProps {}
 
 function StudentRoutes() {
   return (
-    <Switch>
-      <Redirect path="/" exact to="/portfolio" />
-      <Route path="/portfolio" component={Portfolio} />
-    </Switch>
+    <Routes>
+      <Route path="/" element={<Navigate replace to="/portfolio" />} />
+      <Route path="/portfolio" element={<Portfolio />} />
+    </Routes>
   )
 }
 
@@ -20,7 +22,11 @@ function StudentNavigation() {
   return (
     <ul>
       <li>
-        <StyledNavLink foo to="/portfolio" isActive={(match) => !!match}>
+        <StyledNavLink
+          foo
+          to="/portfolio"
+          className={({ isActive }) => (isActive ? 'active' : '')}
+        >
           Portfolio
         </StyledNavLink>
       </li>
@@ -28,16 +34,31 @@ function StudentNavigation() {
   )
 }
 
-export default function Students(props: StudentsProps) {
+export function Students(props: StudentsProps) {
   const { user } = useAuthenticationContext()
   return (
-    <>
-      {StudentRoutes}
+    <ThemeProvider theme={defaultTheme}>
       <ComponentContent>
         <h1>Welcome to Students!</h1>
-        {StudentNavigation}
+
+        <ul>
+          <li>
+            <StyledNavLink
+              foo
+              to="/portfolio"
+              className={({ isActive }) => (isActive ? 'active' : '')}
+            >
+              Portfolio
+            </StyledNavLink>
+          </li>
+        </ul>
+
+        <Routes>
+          <Route path="/" element={<Navigate replace to="/portfolio" />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+        </Routes>
       </ComponentContent>
-    </>
+    </ThemeProvider>
   )
 }
 

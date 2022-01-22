@@ -2,7 +2,7 @@ import { Admin } from '@msm/admin'
 import { useAuthenticationContext } from '@msm/core'
 import { Students } from '@msm/students'
 import { Teachers } from '@msm/teachers'
-import { Redirect, useLocation } from 'react-router-dom'
+import { Navigate, useLocation } from 'react-router-dom'
 
 export default function ModuleLoader() {
   const { tokenCheck, user, badToken, onLogout, fetchUser } =
@@ -11,11 +11,7 @@ export default function ModuleLoader() {
 
   if (!tokenCheck() || badToken) {
     onLogout()
-    return (
-      <Redirect
-        to={{ pathname: '/login', state: { from: location.pathname } }}
-      />
-    )
+    return <Navigate to="/login" state={{ from: location.pathname }} />
   }
 
   if (!user) {

@@ -1,3 +1,5 @@
+import { defaultTheme } from '@msm/ui'
+import { ThemeProvider } from '@mui/system'
 import { Route, Link } from 'react-router-dom'
 
 import styled from 'styled-components'
@@ -11,19 +13,21 @@ const StyledTeachers = styled.div`
 
 export function Teachers(props: TeachersProps) {
   return (
-    <StyledTeachers>
-      <h1>Welcome to Teachers!</h1>
+    <ThemeProvider theme={defaultTheme}>
+      <StyledTeachers>
+        <h1>Welcome to Teachers!</h1>
 
-      <ul>
-        <li>
-          <Link to="/">teachers root</Link>
-        </li>
-      </ul>
-      <Route
-        path="/"
-        render={() => <div>This is the teachers root route.</div>}
-      />
-    </StyledTeachers>
+        <ul>
+          <li>
+            <Link to="/">teachers root</Link>
+          </li>
+        </ul>
+        <Route
+          path="/"
+          element={() => <div>This is the teachers root route.</div>}
+        />
+      </StyledTeachers>
+    </ThemeProvider>
   )
 }
 

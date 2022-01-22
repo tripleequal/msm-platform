@@ -46,9 +46,10 @@ const initialValues: IAuthContext = {
 const AuthenticationContext = createContext<IAuthContext>(initialValues)
 const AUTH_KEY = '__msm_auth__'
 
-export function AuthenticationContextProvider(
-  props: HTMLAttributes<HTMLDivElement>
-) {
+export function AuthenticationContextProvider({
+  children,
+  ...props
+}: HTMLAttributes<HTMLDivElement>) {
   const [user, setUser] = useState<IUser | null | undefined>(null)
   const [badToken, setBadToken] = useState(false)
 
@@ -105,10 +106,9 @@ export function AuthenticationContextProvider(
   }
 
   return (
-    <AuthenticationContext.Provider
-      value={values}
-      {...props}
-    ></AuthenticationContext.Provider>
+    <AuthenticationContext.Provider value={values} {...props}>
+      {children}
+    </AuthenticationContext.Provider>
   )
 }
 

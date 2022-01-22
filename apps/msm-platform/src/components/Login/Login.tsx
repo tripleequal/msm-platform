@@ -12,7 +12,7 @@ import {
   Stack,
   TextField,
   Typography,
-  TypographyProps
+  TypographyProps,
 } from '@mui/material'
 import { HTMLAttributes, useCallback, useState } from 'react'
 import { useLocation } from 'react-router-dom'
@@ -26,7 +26,10 @@ export default function Login() {
   const [loginError, setLoginError] = useState('')
   const [username, setUserName] = useState('')
   const [password, setPassword] = useState('')
-  const location = useLocation<{ from?: string }>()
+  // those jerks at react-router removed the ability to pass in a type definiton
+  // for state. So now you have to do some hacky casting when you use it
+  const location = useLocation()
+  const { state } = location
   const { login } = useAuthenticationContext()
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = useCallback(
@@ -44,13 +47,14 @@ export default function Login() {
 
       setLoginError('')
 
-      if (location.state.from) {
-        window.location.href = location.state.from
+      // here's the hacky casting that is mentioned above
+      if ((state as { from: string })?.from) {
+        window.location.href = (state as { from: string }).from
       } else {
         window.location.href = '/'
       }
     },
-    [username, password, location, login]
+    [username, password, state, login]
   )
 
   const brandingTemplate = () => {
