@@ -19,7 +19,15 @@ export function Admin() {
       <Grid container>
         <AppBar position="absolute" open={open} toggleDrawer={toggleDrawer} />
         <Drawer variant="permanent" open={open} toggleDrawer={toggleDrawer} />
-        <main style={{ padding: theme.spacing(3), height: '100vh' }}>
+        <main
+          style={{
+            padding: theme.spacing(3),
+            height: '100vh',
+            flex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
           <Toolbar />
           <Routes>
             <Route path="/districts" element={<DistrictsList />} />

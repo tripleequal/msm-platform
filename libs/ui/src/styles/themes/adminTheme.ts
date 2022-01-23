@@ -1,3 +1,4 @@
+import type {} from '@mui/x-data-grid/themeAugmentation'
 import { createTheme } from '@mui/material'
 
 const SERIF = 'Garamond, serif'
@@ -49,5 +50,3 @@ export const adminFullTheme = {
   drawerWidth: '240px',
   halfSpacing: '4px',
 }
-
-console.log('theme', adminMuiTheme)
