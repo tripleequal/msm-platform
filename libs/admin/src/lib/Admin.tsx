@@ -3,10 +3,10 @@ import { useState } from 'react'
 import { Route, Link, Routes } from 'react-router-dom'
 import { adminFullTheme as theme } from '@msm/ui'
 
-import AppBar from './components/AppBar/AppBar'
-import Drawer from './components/Drawer/Drawer'
+import AppBar from './shared/AppBar/AppBar'
+import Drawer from './shared/Drawer/Drawer'
 import { adminMuiTheme } from '@msm/ui'
-import DistrictsList from './components/DistrictsList/DistrictsList'
+import DistrictTable from './district/DistrictTable'
 
 export function Admin() {
   const [open, setOpen] = useState(true)
@@ -30,7 +30,7 @@ export function Admin() {
         >
           <Toolbar />
           <Routes>
-            <Route path="/districts" element={<DistrictsList />} />
+            <Route path="/districts" element={<DistrictTable />} />
           </Routes>
         </main>
       </Grid>

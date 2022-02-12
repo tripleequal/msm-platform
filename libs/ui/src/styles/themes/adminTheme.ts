@@ -1,8 +1,19 @@
 import type {} from '@mui/x-data-grid/themeAugmentation'
 import { createTheme } from '@mui/material'
 
-const SERIF = 'Garamond, serif'
-const SANS_SERIF = 'Helvetica, sans-serif'
+const SERIF = `'Noto Serif', serif;`
+const SANS_SERIF = `'Quicksand', sans-serif`
+
+const GRAYSCALE = {
+  100: '#f4f4f4',
+  200: '#ececec',
+  400: '#bbbbbb',
+  500: '#9b9b9b',
+  600: '#727272',
+  700: '#5f5f5f',
+  800: '#404040',
+  900: '#1f1f1f',
+}
 
 export const adminMuiTheme = createTheme({
   palette: {
@@ -12,8 +23,15 @@ export const adminMuiTheme = createTheme({
     secondary: {
       main: '#f50057',
     },
+    text: {
+      primary: GRAYSCALE[800],
+      secondary: GRAYSCALE[600],
+    },
   },
   typography: {
+    body2: {
+      color: GRAYSCALE[600],
+    },
     fontFamily: SANS_SERIF,
     h1: {
       fontFamily: SERIF,
