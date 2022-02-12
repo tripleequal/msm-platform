@@ -17,6 +17,8 @@ import PersonIcon from '@mui/icons-material/Person'
 import { noop } from '@msm/core/utils'
 import { NavLink, useMatch } from 'react-router-dom'
 
+console.log('theme', theme)
+
 interface DrawerProps extends MuiDrawerProps {
   toggleDrawer?: () => void
 }
@@ -33,6 +35,7 @@ export default function Drawer({ toggleDrawer = noop, ...props }: DrawerProps) {
           paddingRight: theme.spacing(),
         }}
       >
+        Admin
         <IconButton onClick={toggleDrawer}>
           <ChevronLeftIcon />
         </IconButton>
@@ -89,9 +92,12 @@ function NavItem({ to, text, icon }: NavItemProps) {
       component={NavLink}
       to={to}
       className={match ? 'Mui-selected' : ''}
-      style={{ color: theme.palette.text.primary }}
     >
-      <ListItemIcon>{icon}</ListItemIcon>
+      <ListItemIcon
+        style={{ color: match ? theme.palette.grey[100] : undefined }}
+      >
+        {icon}
+      </ListItemIcon>
       <ListItemText primary={text} />
     </ListItem>
   )

@@ -4,7 +4,7 @@ import { createTheme } from '@mui/material'
 const SERIF = `'Noto Serif', serif;`
 const SANS_SERIF = `'Quicksand', sans-serif`
 
-const GRAYSCALE = {
+const GREYSCALE = {
   100: '#f4f4f4',
   200: '#ececec',
   400: '#bbbbbb',
@@ -15,22 +15,41 @@ const GRAYSCALE = {
   900: '#1f1f1f',
 }
 
+const NAVYSCALE = {
+  50: '#e6eaf1',
+  600: '#1c4f8b',
+  900: '#002b5c',
+}
+
+const GOLDSCALE = {
+  700: '#f9a01b',
+}
+
+const EGGSHELL = '#fafafa'
+
 export const adminMuiTheme = createTheme({
   palette: {
     primary: {
-      main: '#3f51b5',
+      main: NAVYSCALE[900],
     },
     secondary: {
-      main: '#f50057',
+      main: GOLDSCALE[700],
     },
     text: {
-      primary: GRAYSCALE[800],
-      secondary: GRAYSCALE[600],
+      primary: GREYSCALE[800],
+      secondary: GREYSCALE[600],
+    },
+    background: {
+      paper: EGGSHELL,
+    },
+    grey: {
+      50: EGGSHELL,
+      100: GREYSCALE[100],
     },
   },
   typography: {
     body2: {
-      color: GRAYSCALE[600],
+      color: GREYSCALE[600],
     },
     fontFamily: SANS_SERIF,
     h1: {
@@ -57,6 +76,18 @@ export const adminMuiTheme = createTheme({
       styleOverrides: {
         'h1, h2, h3, h4, h5, h6': {
           fontFamily: SERIF,
+          color: NAVYSCALE[900],
+        },
+      },
+    },
+    MuiListItem: {
+      styleOverrides: {
+        root: {
+          color: GREYSCALE[800],
+          '&.Mui-selected': {
+            backgroundColor: NAVYSCALE[600],
+            color: GREYSCALE[100],
+          },
         },
       },
     },
