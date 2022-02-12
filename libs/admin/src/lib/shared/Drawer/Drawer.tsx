@@ -12,9 +12,10 @@ import {
 } from '@mui/material'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import BusinessIcon from '@mui/icons-material/Business'
+import SchoolIcon from '@mui/icons-material/School'
+import PersonIcon from '@mui/icons-material/Person'
 import { noop } from '@msm/core/utils'
 import { NavLink, useMatch } from 'react-router-dom'
-import { ReactNode } from 'react'
 
 interface DrawerProps extends MuiDrawerProps {
   toggleDrawer?: () => void
@@ -39,12 +40,9 @@ export default function Drawer({ toggleDrawer = noop, ...props }: DrawerProps) {
       <Divider />
       <List>
         <div>
-          <NavItem to="/districts">
-            <ListItemIcon>
-              <BusinessIcon />
-            </ListItemIcon>
-            <ListItemText primary="Districts" />
-          </NavItem>
+          <NavItem to="/districts" text="Districts" icon={<BusinessIcon />} />
+          <NavItem to="/schools" text="Schools" icon={<SchoolIcon />} />
+          <NavItem to="/teachers" text="Teachers" icon={<PersonIcon />} />
         </div>
       </List>
     </StyledDrawer>
@@ -81,9 +79,10 @@ const StyledDrawer = styled(MuiDrawer).withConfig<DrawerProps>({
 
 interface NavItemProps {
   to: string
-  children: ReactNode
+  text: string
+  icon: JSX.Element
 }
-function NavItem({ to, children }: NavItemProps) {
+function NavItem({ to, text, icon }: NavItemProps) {
   const match = useMatch(to)
   return (
     <ListItem
@@ -92,10 +91,8 @@ function NavItem({ to, children }: NavItemProps) {
       className={match ? 'Mui-selected' : ''}
       style={{ color: theme.palette.text.primary }}
     >
-      <ListItemIcon>
-        <BusinessIcon />
-      </ListItemIcon>
-      <ListItemText primary="Districts" />
+      <ListItemIcon>{icon}</ListItemIcon>
+      <ListItemText primary={text} />
     </ListItem>
   )
 }

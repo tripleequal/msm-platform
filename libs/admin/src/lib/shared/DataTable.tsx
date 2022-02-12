@@ -16,6 +16,7 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
+  DialogContentText,
   DialogTitle,
   IconButton,
   Typography,
@@ -32,6 +33,7 @@ interface DataTableProps<T> {
   colDefs: GridColDef[]
   DetailView: FunctionComponent<{ entity: T | null | undefined }>
   EditView: FunctionComponent<FormikProps<T>>
+  recordName: (entity: T) => string
 }
 export default function DataTable<T extends BaseEntity>({
   data,
@@ -39,6 +41,7 @@ export default function DataTable<T extends BaseEntity>({
   loading,
   DetailView,
   EditView,
+  recordName,
 }: DataTableProps<T>) {
   const memoizedData = useMemo(() => data ?? [], [data])
 
@@ -65,6 +68,7 @@ export default function DataTable<T extends BaseEntity>({
           width: 150,
           renderCell: (cell) => (
             <ActionsCell
+              deleteConfirmText={recordName(cell.row)}
               onEditButtonClick={(e) => {
                 e.stopPropagation()
                 openEdit(cell.row as T)
@@ -75,7 +79,7 @@ export default function DataTable<T extends BaseEntity>({
           ),
         },
       ]),
-    [colDefs, openEdit]
+    [colDefs, openEdit, recordName]
   )
 
   const onEditSubmit = () => {
@@ -122,7 +126,7 @@ export default function DataTable<T extends BaseEntity>({
         <Formik initialValues={selectedEntity as T} onSubmit={onEditSubmit}>
           {(formProps) => (
             <Form>
-              <DialogTitle>Edit</DialogTitle>
+              <DialogTitle>Edit {recordName(selectedEntity as T)}</DialogTitle>
               <DialogContent dividers>
                 <EditView {...formProps} />
               </DialogContent>
@@ -165,26 +169,68 @@ const StyledDataGrid = styled(DataGrid)`
 `
 
 interface ActionCellProps {
+  deleteConfirmText: string
   onEditButtonClick: (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => void
 }
 function ActionsCell({
+  deleteConfirmText,
   children,
   onEditButtonClick,
 }: HTMLAttributes<HTMLSpanElement> & ActionCellProps) {
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false)
+
+  const handleDeleteConfirmClose = () => {
+    setDeleteConfirmOpen(false)
+  }
+
+  const handleDeleteConfirm = () => {
+    setDeleteConfirmOpen(false)
+  }
+
+  const handleDeleteButtonClick: React.MouseEventHandler<HTMLButtonElement> = (
+    e
+  ) => {
+    e.stopPropagation()
+    setDeleteConfirmOpen(true)
+  }
+
   return (
-    <StyledActionsCell>
-      <span className="default-value">{children}</span>
-      <span className="actions-container">
-        <IconButton onClick={onEditButtonClick}>
-          <EditIcon />
-        </IconButton>
-        <IconButton>
-          <DeleteIcon />
-        </IconButton>
-      </span>
-    </StyledActionsCell>
+    <>
+      <StyledActionsCell>
+        <span className="default-value">{children}</span>
+        <span className="actions-container">
+          <IconButton onClick={onEditButtonClick}>
+            <EditIcon />
+          </IconButton>
+          <IconButton onClick={handleDeleteButtonClick}>
+            <DeleteIcon />
+          </IconButton>
+        </span>
+      </StyledActionsCell>
+      <Dialog
+        open={deleteConfirmOpen}
+        onClose={handleDeleteConfirmClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          Delete {deleteConfirmText}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to delete this record?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDeleteConfirmClose}>Cancel</Button>
+          <Button onClick={handleDeleteConfirm} autoFocus>
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
   )
 }
 

@@ -7,6 +7,8 @@ import AppBar from './shared/AppBar/AppBar'
 import Drawer from './shared/Drawer/Drawer'
 import { adminMuiTheme } from '@msm/ui'
 import DistrictTable from './district/DistrictTable'
+import SchoolTable from './school/SchoolTable'
+import TeacherTable from './teacher/TeacherTable'
 
 export function Admin() {
   const [open, setOpen] = useState(true)
@@ -31,6 +33,8 @@ export function Admin() {
           <Toolbar />
           <Routes>
             <Route path="/districts" element={<DistrictTable />} />
+            <Route path="/schools" element={<SchoolTable />} />
+            <Route path="/teachers" element={<TeacherTable />} />
           </Routes>
         </main>
       </Grid>

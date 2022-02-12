@@ -1,4 +1,4 @@
-import { DataGrid, GridColDef, GridRow } from '@mui/x-data-grid'
+import { GridColDef } from '@mui/x-data-grid'
 import useData from '../../useData'
 import { CreateDistrict, District } from './types'
 import Page from '../shared/Page/Page'
@@ -38,6 +38,7 @@ export default function DistrictTable() {
       }
     >
       <DataTable<District>
+        recordName={(district) => district.districtName}
         colDefs={columns}
         data={data}
         loading={loading}

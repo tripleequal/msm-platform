@@ -1,8 +1,6 @@
-import styled from 'styled-components'
-import { adminFullTheme as theme } from '@msm/ui'
 import { District } from './types'
-import { DialogTitle } from '@mui/material'
 import { EntityDialogProps } from '../shared/DataTable'
+import DetailBox from '../shared/DetailBox'
 
 export default function DistrictDetailDialog({
   entity,
@@ -33,18 +31,6 @@ export default function DistrictDetailDialog({
         <label>Auth Provider</label>
         {entity?.authProvider}
       </DetailBox>
-      <DatesBox></DatesBox>
     </div>
   )
 }
-
-const DetailBox = styled.div`
-  min-width: 400px;
-  padding-bottom: ${theme.spacing(2)};
-  label {
-    color: ${theme.palette.text.secondary};
-    display: block;
-  }
-`
-
-const DatesBox = styled.div``
